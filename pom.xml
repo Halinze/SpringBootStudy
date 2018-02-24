@@ -18,12 +18,35 @@
     </parent>
 
 
-    <!--自动引入tomcat和spring-webmvc等相关包-->
+
       <dependencies>
+          <!--自动引入tomcat和spring-webmvc等相关包-->
           <dependency>
               <groupId>org.springframework.boot</groupId>
               <artifactId>spring-boot-starter-web</artifactId>
           </dependency>
+
+
+          <!--swagger微服务文档输出,不知道正常的ssm项目可不可以用-->
+          <dependency>
+              <groupId>io.springfox</groupId>
+              <artifactId>springfox-swagger2</artifactId>
+              <version>2.2.2</version>
+          </dependency>
+
+          <dependency>
+              <groupId>io.springfox</groupId>
+              <artifactId>springfox-swagger-ui</artifactId>
+              <version>2.2.2</version>
+          </dependency>
+
+          <dependency>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>1.16.8</version>
+          </dependency>
+
+
       </dependencies>
       <build>
           <plugins>
@@ -32,7 +55,5 @@
                   <artifactId>spring-boot-maven-plugin</artifactId>
               </plugin>
           </plugins>
-
       </build>
-
 </project>
