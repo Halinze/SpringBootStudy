@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <!--逆向工程所所需的配置文件-->
+
+    <!--最好写成绝对路径 数据库驱动-->
+    <classPathEntry location="D:\apache-maven-3.3.9\resposity\mysql\mysql-connector-java\5.1.37\mysql-connector-java-5.1.37.jar"/>
+
+    <context id="mysql">
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--数据库连接地址账号密码-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/microservicedb1?characterEncoding=utf-8"
+                        userId="root" password="root">
+        </jdbcConnection>
+        <!--生成Model类存放的位置-->
+        <javaModelGenerator targetPackage="com.microservice.firstboot.model" targetProject="src">
+            <property name="enabelSubPackages" value="true"/>
+            <property name="trimsString" value="true"/>
+        </javaModelGenerator>
+
+        <!--生成映射文件存放的位置-->
+        <sqlMapGenerator targetPackage="sqlmap" targetProject="src">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!--生成mapper接口存放的位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.microservice.firstboot.mapper" targetProject="src">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+
+        <!--对应表及类名-->
+        <table tableName="t_user" domainObjectName="UserSec" enableCountByExample="false" enableUpdateByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    </context>
+</generatorConfiguration>
