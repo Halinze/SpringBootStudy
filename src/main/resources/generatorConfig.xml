@@ -15,7 +15,7 @@
         </commentGenerator>
         <!--数据库连接地址账号密码-->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/microservicedb1?characterEncoding=utf-8"
+                        connectionURL="jdbc:mysql://localhost:3306/microservicedb2?characterEncoding=utf-8"
                         userId="root" password="root">
         </jdbcConnection>
         <!--生成Model类存放的位置-->
@@ -36,7 +36,7 @@
 
 
         <!--对应表及类名-->
-        <table tableName="t_user" domainObjectName="UserSec" enableCountByExample="false" enableUpdateByExample="false"
+        <table tableName="t_car" domainObjectName="Car" enableCountByExample="false" enableUpdateByExample="false"
         enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
     </context>
 </generatorConfiguration>
