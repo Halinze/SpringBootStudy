@@ -19,8 +19,8 @@ public class CarDao {
     private CarMapper carMapper;
 
     public List<Car> selectByOwner(long ownerId){
-        //设置数据库
-        DatabaseContextHolder.setDatabaseType(DatabaseType.microservicedb2);
+        //设置数据库 设置切面了
+       // DatabaseContextHolder.setDatabaseType(DatabaseType.microservicedb2);
         return  carMapper.selectByOwner(ownerId);
     }
 
