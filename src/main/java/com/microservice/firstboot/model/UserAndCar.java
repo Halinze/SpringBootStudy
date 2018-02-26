@@ -1,21 +1,21 @@
 package com.microservice.firstboot.model;
 
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
+/**
+ * Created by 46597 on 2018/2/25.
+ */
 @Getter
 @Setter
 @NoArgsConstructor
-public class Car {
-    private Long id;
+public class UserAndCar extends UserSec{
 
-    private String name;
+    private List<Car> cars ;
 
-    private String color;
-
-    private Long owner;
 
 
 }

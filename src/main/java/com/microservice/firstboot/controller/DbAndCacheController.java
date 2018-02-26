@@ -1,7 +1,9 @@
 package com.microservice.firstboot.controller;
 
+import com.microservice.firstboot.model.UserAndCar;
 import com.microservice.firstboot.model.UserSec;
 import com.microservice.firstboot.service.UserSecService;
+import com.sun.xml.internal.ws.wsdl.writer.document.ParamType;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,4 +32,14 @@ public class DbAndCacheController {
     }
 
 
+    @ApiOperation("根据用户id获取用户及车辆信息")
+    @ApiImplicitParams({@ApiImplicitParam(paramType = "query",name = "id" , dataType = "long" ,
+            required = true ,value ="用户的id",defaultValue = "1")})
+    @RequestMapping(value = "/getUserAndCar" ,method = RequestMethod.GET)
+    public UserAndCar getUserAndCar(@RequestParam("id")long id){
+        return userSecService.getUserAndCar(id);
+    }
+
 }
+
+

@@ -5,12 +5,15 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.sql.DataSource;
+import java.util.HashMap;
 import java.util.Properties;
 
 /**
@@ -25,19 +28,49 @@ public class MyBatisConfig {
 
     //主意下这里DataSource的包
     @Bean
-    public DataSource dataSource() throws Exception{
+    public DataSource microservicedb1DataSource() throws Exception {
 
         Properties props = new Properties();
-        props.put("driverClassName",env.getProperty("microservicedb1.jdbc.driver"));
-        props.put("url",env.getProperty("microservicedb1.jdbc.url"));
-        props.put("username",env.getProperty("microservicedb1.jdbc.username"));
-        props.put("password",env.getProperty("microservicedb1.jdbc.password"));
+        props.put("driverClassName", env.getProperty("microservicedb1.jdbc.driver"));
+        props.put("url", env.getProperty("microservicedb1.jdbc.url"));
+        props.put("username", env.getProperty("microservicedb1.jdbc.username"));
+        props.put("password", env.getProperty("microservicedb1.jdbc.password"));
         return DruidDataSourceFactory.createDataSource(props);
+    }
+
+
+    @Bean
+    public DataSource microservicedb2DataSource() throws Exception {
+
+        Properties props = new Properties();
+        props.put("driverClassName", env.getProperty("microservicedb2.jdbc.driver"));
+        props.put("url", env.getProperty("microservicedb2.jdbc.url"));
+        props.put("username", env.getProperty("microservicedb2.jdbc.username"));
+        props.put("password", env.getProperty("microservicedb2.jdbc.password"));
+        return DruidDataSourceFactory.createDataSource(props);
+    }
+
+
+    @Bean
+    @Primary
+    public DynamicDataSource dataSource(@Qualifier("microservicedb1DataSource") DataSource microservicedb1DataSource,
+                                        @Qualifier("microservicedb2DataSource") DataSource microservicedb2DataSource) {
+
+
+        HashMap<Object, Object> targetDataSources = new HashMap<>();
+        targetDataSources.put(DatabaseType.microservicedb1, microservicedb1DataSource);
+        targetDataSources.put(DatabaseType.microservicedb2, microservicedb2DataSource);
+
+        DynamicDataSource dataSource = new DynamicDataSource();//该方法是AbstractRoutingDataSource的方法
+        dataSource.setTargetDataSources(targetDataSources);//默认的datasource设置为myTestDbDataSource
+        dataSource.setDefaultTargetDataSource(microservicedb1DataSource);
+        return dataSource;
 
     }
 
+
     @Bean
-    public SqlSessionFactory sqlSessionFactory(DataSource ds) throws Exception {
+    public SqlSessionFactory sqlSessionFactory(DynamicDataSource ds) throws Exception {
         SqlSessionFactoryBean fb = new SqlSessionFactoryBean();
         fb.setDataSource(ds);
         //类似于xml中指定别名
@@ -46,8 +79,6 @@ public class MyBatisConfig {
         fb.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:sqlmap/*.xml"));
         return fb.getObject();
     }
-
-
 
 
 }
