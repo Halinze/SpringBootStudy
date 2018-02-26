@@ -22,7 +22,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2//启动Swagger
 public class Application {
 
-
+    //todo  事务的问题  多数据源的事务问题；
     public static void main(String[] args) {
         SpringApplication.run(Application.class,args);
     }
