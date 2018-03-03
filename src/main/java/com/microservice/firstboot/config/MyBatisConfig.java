@@ -82,6 +82,8 @@ public class MyBatisConfig {
         dataSource.setDefaultTargetDataSource(microservicedb1DataSource);
         System.out.println("git 测试 ！");
         System.out.println("aaaa");
+        System.out.println("bbbbb");
+        System.out.println("cssss");
         return dataSource;
 
     }
