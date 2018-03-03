@@ -1,6 +1,7 @@
 package com.microservice.firstboot.config;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -64,6 +65,7 @@ public class MyBatisConfig {
         DynamicDataSource dataSource = new DynamicDataSource();//该方法是AbstractRoutingDataSource的方法
         dataSource.setTargetDataSources(targetDataSources);//默认的datasource设置为myTestDbDataSource
         dataSource.setDefaultTargetDataSource(microservicedb1DataSource);
+        System.out.println("git 测试 ！");
         return dataSource;
 
     }
