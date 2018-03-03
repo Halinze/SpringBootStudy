@@ -90,6 +90,13 @@
             <version>1.0.9</version>
         </dependency>
 
+        <!--解决多数据源的分布式事务问题-->
+        <!--atomikos transaction management-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jta-atomikos</artifactId>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
