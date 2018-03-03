@@ -79,7 +79,9 @@ public class MyBatisConfig {
         fb.setTypeAliasesPackage("com.microservice.firstboot.model");
         //xml中创建sqlsessionFactory时候指定mapper位置
         fb.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:sqlmap/*.xml"));
+        System.out.println("hello java");
         return fb.getObject();
+
     }
 
 
