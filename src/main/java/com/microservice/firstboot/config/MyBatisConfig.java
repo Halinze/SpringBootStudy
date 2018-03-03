@@ -66,6 +66,8 @@ public class MyBatisConfig {
         dataSource.setTargetDataSources(targetDataSources);//默认的datasource设置为myTestDbDataSource
         dataSource.setDefaultTargetDataSource(microservicedb1DataSource);
         System.out.println("git 测试 ！");
+        System.out.println("草师生");
+
         return dataSource;
 
     }
